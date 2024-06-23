@@ -1,19 +1,33 @@
 [tool.poetry]
+name = "src"
+version = "0.1.0"
+description = "A reinforcement learning app aiming to achieve the training of the taxidriver agent as other from the gymnasium library"
+authors = ["Arthur Béquié <arthur.bequie@epitech.eu>", "Hugo Mortreux <hugo.mortreux@epitech.eu"]
+readme = "README.md"
 package-mode = false
-name = "bootstrap"
+packages = [
+    { include = "src", from = "." }
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-poethepoet = "^0.25.0"
+typer = {extras = ["all"], version = "^0.12.3"}
 gymnasium = {extras = ["toy-text"], version = "^0.29.1"}
+pyqtgraph = "^0.13.7"
+numpy = "^2.0.0"
+pyqt6 = "^6.7.0"
+ipython = "^8.25.0"
 rich = "^13.7.1"
-jupyter = "^1.0.0"
-matplotlib = "^3.8.3"
+inquirerpy = "^0.3.4"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.2"
+
+[tool.poetry.scripts]
+ux = "src.main:app_cli"
+tx = "src.main:trainer_cli"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.poe.tasks]
-q = "python3 -m qlearning"
