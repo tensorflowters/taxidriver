@@ -1,0 +1,5 @@
+alpha: 0.1
+gamma: 0.6
+epsilon: 1.0
+epsilon_decay: 0.995
+epsilon_minimal: 0.1

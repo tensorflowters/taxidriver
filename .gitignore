@@ -166,3 +166,4 @@ models/**
 .vscode
 .cache
 .local
+.trunk

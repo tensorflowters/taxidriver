@@ -1,3 +1,5 @@
+from typing import Any
+
 from InquirerPy import get_style, inquirer
 from InquirerPy.base.control import Choice
 
@@ -26,22 +28,23 @@ colors = {
 
 
 def select_prompt(
-    choices: list[Choice], message: str, instruction: str = "", **kwargs
-) -> str:
+    choices: list[Choice], message: str, instruction: str = "", **kwargs: dict[str, Any]
+) -> Any:
     style = get_style(
         colors,
         style_override=True,
     )
+    default = kwargs.get("default")
     return inquirer.select(
         choices=choices,
         message=message,
         style=style,
         instruction=instruction,
-        **kwargs,
+        default=default,
     ).execute()
 
 
-def default_prompt(message: str, **kwargs) -> str:
+def default_prompt(message: str, **kwargs: dict[str, Any]) -> Any:
     style = get_style(
         colors,
         style_override=True,
@@ -54,14 +57,21 @@ def default_prompt(message: str, **kwargs) -> str:
     ).execute()
 
 
-def default_prompt_float(message: str, number: float, **kwargs) -> float:
+def default_prompt_float(
+    message: str, number: float, **kwargs: dict[str, Any]
+) -> float:
     style = get_style(
         colors,
         style_override=True,
     )
 
-    default = number
+    default = kwargs.get("default", number)
 
-    return inquirer.number(
+    response: Any = inquirer.number(
         message=f"{message}", style=style, default=default, float_allowed=True
-    ).execute()
+    ).execute(raise_keyboard_interrupt=True)
+
+    if response and type(response) == "float":
+        return float(response)
+    else:
+        raise TypeError(f"Invalid input. Expected a float. Received: {response}")
