@@ -1,7 +1,8 @@
+import sys
+
 import gymnasium as gym
-import pyqtgraph as pg
 from InquirerPy.base.control import Choice
-from PyQt6 import QtWidgets
+from PyQt6.QtWidgets import QApplication
 from typer import Typer
 
 from .agents.taxi_v3 import TaxiV3Agent
@@ -42,30 +43,17 @@ def run_agent() -> None:
     help="Run the GUI application. This is temporary and will not include holding all the app logic.",
 )
 def run_app() -> None:
-    # app = GUIApp()
-    app = QtWidgets.QApplication([])
-    w = MainWindow()
-    # app.setActiveWindow(w)
-    # w = QtWidgets.QWidget()
-    w.setWindowTitle("PyQtGraph example")
+    app = QApplication(sys.argv)
+    app.setStyle("Fusion")
 
-    ## Create some widgets to be placed inside
-    btn = QtWidgets.QPushButton("press me")
-    text = QtWidgets.QLineEdit("enter text")
-    listw = QtWidgets.QListWidget()
-    plot = pg.PlotWidget()
+    win = MainWindow()
 
-    ## Create a grid layout to manage the widgets size and position
-    layout = QtWidgets.QGridLayout()
-    w.setLayout(layout)
+    app.setApplicationDisplayName("Taxi-v3")
+    app.setApplicationName("Taxi-v3")
+    app.setApplicationVersion("0.1.0")
 
-    ## Add widgets to the layout in their proper positions
-    layout.addWidget(btn, 0, 0)  # button goes in upper-left
-    layout.addWidget(text, 1, 0)  # text edit goes in middle-left
-    layout.addWidget(listw, 2, 0)  # list widget goes in bottom-left
-    layout.addWidget(plot, 0, 1, 3, 1)  # plot goes on right side, spanning 3 rows
-    ## Display the widget as a new window
-    w.show()
+    win.show()
+
     app.exec()
 
 
