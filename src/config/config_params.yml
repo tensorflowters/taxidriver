@@ -1,0 +1,26 @@
+alpha: 0.1
+gamma: 0.6
+epsilon: 1.0
+epsilon_decay: 0.995
+epsilon_minimal: 0.1
+widgets:
+  - type: "button"
+    id: "start_btn"
+    label: "Start"
+  - type: "button"
+    id: "stop_btn"
+    label: "Stop"
+  - type: "button"
+    id: "save_btn"
+    label: "Save"
+plots:
+  - type: "line"
+    id: "reward_plot"
+    title: "Reward"
+    cols: ["Episode", "Reward"]
+    default_value: [0, 0]
+  - type: "line"
+    id: "epsilon_plot"
+    title: "Epsilon"
+    cols: ["Episode", "Epsilon"]
+    default_value: [0, 0]

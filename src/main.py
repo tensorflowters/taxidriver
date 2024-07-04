@@ -7,7 +7,7 @@ from typer import Typer
 
 from .agents.taxi_v3 import TaxiV3Agent
 from .cli.prompts import default_prompt_float
-from .config.base import HyperparametersConfig
+from .config.base import Config
 from .settings.logger import p as print
 from .ui.window import MainWindow
 
@@ -24,7 +24,7 @@ taxi_cli = Typer(
 def run_agent() -> None:
     print(gym.envs.registry.keys(), "Environment registery", "All envs keys")
 
-    _ = TaxiV3Agent(*HyperparametersConfig())
+    _ = TaxiV3Agent(*Config())
 
 
 # @taxi_cli.command(
@@ -47,7 +47,10 @@ def run_app() -> None:
     app.setStyle("Fusion")
 
     win = MainWindow()
+    win.setup_ui()
+    win.set_plot_widget()
 
+    app.setPalette(win.darkPalette)
     app.setApplicationDisplayName("Taxi-v3")
     app.setApplicationName("Taxi-v3")
     app.setApplicationVersion("0.1.0")
