@@ -27,17 +27,6 @@ def run_agent() -> None:
     _ = TaxiV3Agent(*Config())
 
 
-# @taxi_cli.command(
-#     "run_app_debug",
-#     help="Run the GUI application. This is temporary and will not include holding all the app logic.",
-# )
-# def run_app_debug() -> None:
-#     app = QApplication([])
-#     main_window = MainDebugWindow()
-#     main_window.show()
-#     app.exec()
-
-
 @taxi_cli.command(
     "run_app",
     help="Run the GUI application. This is temporary and will not include holding all the app logic.",
@@ -51,9 +40,6 @@ def run_app() -> None:
     win.set_plot_widget()
 
     app.setPalette(win.darkPalette)
-    app.setApplicationDisplayName("Taxi-v3")
-    app.setApplicationName("Taxi-v3")
-    app.setApplicationVersion("0.1.0")
 
     win.show()
 
